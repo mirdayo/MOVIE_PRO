@@ -1,0 +1,103 @@
+.subjecet span{
+	margin-left: 31px;
+    font-size: 40px;
+    font-weight: 900;
+    color: white;
+}
+/* 회원 정보 수정 */
+.mypage-warp>.userChange {
+    position: relative;
+    margin: 30px 50px 10px 50px;
+}
+/* 바로 아래 tip */
+.mypage-warp>.userChange>.tip {
+    display: block;
+    border-bottom: 1px solid black;
+    margin: 0 -30px;
+    padding: 20px 30px 5px;
+    font-size: 20px;
+    font-weight: bold;
+}
+.mypage-warp>.userChange>.user-update {
+    margin-top: 10px;
+}
+/* 각 항목 인풋 박스 */
+.mypage-warp>.userChange>.user-update>form>input {
+    width: 250px;
+    height: 25px;
+    border: 1px solid lightgray;
+}
+/* 각 항목 전송 버튼 */
+.mypage-warp>.userChange>.user-update>form>button {
+    display: inline-block;
+    font-weight: inherit;
+    text-align: center;
+    border: none;
+    border-radius: 2px;
+    color: white;
+    background-color: gray;
+    padding: 0 10px;
+    width: 100px;
+    height: 25px;
+    line-height: 25px;
+}
+.mypage-warp>.userChange>.update-btn-center {
+    text-align: center;
+}
+.mypage-warp>.userChange>.pwd-update-btn-center>.pwd-update-cancle-btn {
+    display: inline-block;
+    font-weight: inherit;
+    font-size: 15px;
+    text-align: center;
+    border: none;
+    border-radius: 2px;
+    color: white;
+    background-color: black;
+    padding: 0 10px;
+    width: 130px;
+    height: 40px;
+    line-height: 40px;
+}
+
+/* 비밀번호 확인 일치 유효성검사 */
+.pwck_input_re_1{
+        color : green;
+        display : none;
+}
+.pwck_input_re_2{
+        color : red;
+        display : none;
+}
+
+/* 유효성 검사 문구 */
+.final_pw_ck{
+	color : red;
+    display: none;
+}
+.final_pwck_ck{
+	color : red;
+    display: none;
+}
+
+/* 비밀번호 확인 일치 유효성검사 */
+.pwck_input_re_1{
+        color : green;
+        display : none;
+}
+.pwck_input_re_2{
+        color : red;
+        display : none;
+}
+
+.correct{
+	color : green;
+}
+.incorrect{
+	color : red;
+}
+
+/* float 속성 해제 */
+.clearfix{
+	clear: both;
+}
+

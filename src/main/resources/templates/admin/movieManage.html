@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="" lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/css/admin/movieManage.css">
+<link rel="stylesheet" href="/css/admin/footer.css">
+<link rel="stylesheet" href="/css/admin/movielist.css">
+
+<script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
+</head>
+<body>
+
+<th:block th:replace="~{includes/admin/header.html :: content}"></th:block>
+
+
+                <div class="admin_content_wrap">
+                    <div class="admin_content_subject"><span>영화 관리</span></div>
+                    <div class="search_wrap" style="display:flex;">
+                        <form name="searchForm" th:action="@{/admin/movieManage}" method="get" style="margin-top:10px;">
+                            <input type="hidden" name="page" th:value="*{pageNum}">
+                            <span class="bunch">
+                                <select name="type" id="sFld">
+                                  <option value="tw" th:selected="${search.type == 'tw'}">전체</option>
+                                  <option value="t" th:selected="${search.type == 't'}">제목</option>
+                                  <option value="w" th:selected="${search.type == 'w'}">장르</option>
+                                  <input type="text" name="keyword" id="sStr" th:value="${search.keyword}" placeholder="검색어를 입력해주세요">
+                                </select>
+                            </span>
+                            <span class="bunch">
+                                <button type="submit" class="btn_search">검색</button>
+                            </span>
+                        </form>
+						<div style="margin-left : 30px; margin-top : 16px; text-align:center;">
+							검색 수 <span th:text="${totalMovieCount}"></span> 건
+						</div>
+						<span>
+							<a th:href="@{/admintest/addUpdate}">목록업데이트</a>
+						</span>
+                    </div>
+					<div class="table_wrap">
+						<table>
+							<thead>
+							<tr>
+								<th class="movieId">번호</th>
+								<th class="movieName">제목</th>
+								<th class="movieRelease">개봉일</th>
+								<th class="movieRating">평점</th>
+								<th class="movieType">장르</th>
+<!--								<th class="movieInfo">줄거리</th>-->
+							</tr>
+							</thead>
+							<tbody>
+							<tr th:each = "movie : ${list}">
+								<td th:text ="${movie.movieId}"></td>
+								<td th:text ="${movie.movieName}"></td>
+								<td th:text ="${movie.movieRelease}"></td>
+								<td th:text ="${movie.movieRating}"></td>
+								<td th:text ="${movie.movieType}"></td>
+<!--								<td th:text ="${movie.movieInfo}"></td>-->
+							</tr>
+							</tbody>
+						</table>
+						<div class ="pageInfo_wrap">
+							<div class="pageInfo_area">
+								<ul id="pageInfo" class="pageInfo">
+									<!-- 이전페이지 버튼 -->
+									<li class="pageInfo_btn previous" th:if="${pageMaker.prev}">
+										<a th:href="@{movieManage(pageNum=${pageMaker.startPage-1}, amount=${pageMaker.criteria.amount}, type=${search.type}, keyword=${search.keyword})}">Prev</a>
+									</li>
+
+									<!-- 페이지 번호 버튼 -->
+									<li th:each="num : ${#numbers.sequence(pageMaker.startPage, pageMaker.endPage)}"
+										class="pageInfo_btn" th:classappend="${num == pageMaker.criteria.pageNum} ? 'active' : ''">
+										<a th:href="@{movieManage(pageNum=${num}, amount=${pageMaker.criteria.amount}, type=${search.type}, keyword=${search.keyword})}" th:text="${num}"></a>
+									</li>
+
+									<!-- 다음페이지 버튼 -->
+									<li class="pageInfo_btn next" th:if="${pageMaker.next}">
+										<a th:href="@{movieManage(pageNum=${pageMaker.endPage + 1}, amount=${pageMaker.criteria.amount}, type=${search.type}, keyword=${search.keyword})}">Next</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<form id="moveForm" method="get">
+							<!-- pageNum 값을 숫자로 변환하여 대체 -->
+							<input type="hidden" name="pageNum" th:attr="value=${pageMaker.criteria.pageNum}">
+							<!-- amount 값을 숫자로 변환하여 대체 -->
+							<input type="hidden" name="amount" th:attr="value=${pageMaker.criteria.amount}">
+						</form>
+					</div>
+				</div>
+
+                <div class="clearfix"></div>
+
+                <footer th:fragment="content">
+                    <div class="footer">
+                        <div class="inner">
+                                <span class="footerlogo"> <img
+                                        src="/image/logo3.png" alt="">
+                                </span>
+                            <ul class="footermenu">
+                                <li><a href="#">이용약관</a></li>
+                                <li><a href="#">개인정보처리방침</a></li>
+                                <li><a href="#">이메일무단수집거부</a></li>
+                                <li><a href="#">영상정보처리기기 운영 및 관리방침</a></li>
+                                <li><a href="#">L.POINT회원안내</a></li>
+                                <li><a href="#">배정기준</a></li>
+                                <li><a href="#">채용안내</a></li>
+                                <li><a href="#">광고/임대문의</a></li>
+                                <li><a href="#">기업정보</a></li>
+                                <li><a href="#">사회적책임</a></li>
+                            </ul>
+                            <div class="address">
+                                <address>서울특별시 송파구 올림픽로 300 롯데월드타워 27층</address>
+                                <span class="bar">고객센터 1544-8855 (유료)</span><br> <span
+                                    class="bar">대표이사 4조</span> <span class="bar">사업자등록번호
+                                        111-11-11111</span> <span class="bar">통신판매업신고번호 제1111호</span> <span
+                                    class="bar">개인정보보호책임자 4조</span>
+                            </div>
+                            <p class="copyright" style="font-size: 12px;">COPYRIGHT LOTTE
+                                CINEMA ALL RIGHT RESERVED.</p>
+                        </div>
+                    </div>
+                </footer>
+
+				<script>
+					$(document).ready(function(){
+						var moveForm = $("#moveForm");
+
+						$(".move").on("click", function(e){
+							e.preventDefault();
+
+							moveForm.append("<input type='hidden' name='movieId' value='"+ $(this).attr("href")+"'>");
+							moveForm.attr("action", "/main");
+							moveForm.submit();
+						});
+
+						$(".pageInfo_area a").on("click", function(e){
+							e.preventDefault();
+
+							var pageNum = parseInt($(this).text());
+
+							if(!isNaN(pageNum)){
+								$("input[name='pageNum']").val(pageNum);
+								$("#moveForm").attr("action", "/admin/movieManage");
+								$("#moveForm").submit();
+							}
+						});
+					});
+				    $(".previous a, .next a").on("click", function(e){
+						e.preventDefault();
+
+						var pageNum = $(this).attr('href').match(/pageNum=(\d+)/)[1];
+
+						if(pageNum){
+							$("input[name='pageNum']").val(pageNum);
+							$("#moveForm").attr("action", "admin/movieManage");
+							$("#moveForm").submit();
+						}
+					});
+				});
+				</script>
+</body>
+</html>

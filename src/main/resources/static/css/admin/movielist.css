@@ -1,0 +1,116 @@
+        a{
+            text-decoration : none;
+        }
+        table{
+           border-collapse: collapse;
+           width: 1000px;
+           margin-top : 20px;
+           text-align: center;
+        }
+        td, th{
+            border : 1px solid black;
+            height: 50px;
+        }
+        th{
+            font-size : 17px;
+        }
+        thead{
+            font-weight: 700;
+        }
+        .table_wrap{
+            margin : 50px 0 0 50px;
+        }
+        .movieId{
+            width: 6%;
+        }
+        .movieName{
+            width: 10%;
+        }
+        .movieRelease{
+            width: 12%;
+        }
+        .movieRating{
+            width: 6%;
+        }
+        .movieType{
+            width: 10%;
+        }
+        .movieInfo{
+            width: 90%;
+        }
+        .top_btn{
+            font-size: 20px;
+            padding: 6px 12px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            font-weight: 600;
+        }
+        .pageInfo{
+            list-style : none;
+            display: inline-block;
+            margin: 50px 0 0 10px;
+        }
+        .pageInfo li{
+            float: left;
+            font-size: 20px;
+            margin-left: 18px;
+            padding: 7px;
+            font-weight: 500;
+        }
+/*        .active{
+            background-color: #cdd5ec;
+        }*/
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .table_wrap {
+            width: 110%;
+            margin: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table thead th {
+           border-bottom :2px solid #000000;
+           padding :10px;
+           text-align :left;
+        }
+
+        table tbody td {
+           border-bottom :1px solid #d1d1d1;
+           padding :10px;
+        }
+
+        .pageInfo_wrap{
+           display:flex;
+           justify-content:center
+        }
+
+        .pageInfo_btn a{
+        	padding :5px 10px ;
+        	border-radius :3px ;
+        	text-decoration:none ;
+        	color:#333 ;
+        	background-color:#ffffff ;
+        	border:solid 1px #cccccc ;
+        	margin-right :5px ;
+        	font-size:.875rem
+        }
+        .pageInfo_btn.active a{
+        	color:#ffffff ;
+        	background-color:#007bff ;
+        	border:solid 1px #007bff ;
+        }

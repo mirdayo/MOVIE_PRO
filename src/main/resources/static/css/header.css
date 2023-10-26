@@ -1,0 +1,258 @@
+ 	*{
+        /* box-sizing: border-box;*/
+         font-family: 'Noto Sans KR', sans-serif;
+
+    }
+    body{
+        padding:0px;
+
+    }
+    ul{
+        padding :0px;
+        margin:0px;
+        list-style:none;
+    }
+    a{
+        color:black;
+        text-decoration: none;
+    }
+
+/*     .wrapper{}
+
+     .wrapper>*{
+
+     }*/
+
+   /* header */
+  .wrapper>header{}
+  .wrapper>header>.top-header{
+   border-bottom : 1px solid lightgray;
+   height:30px;
+   line-height:24px;
+   display:flex;
+   justify-content:right;
+   margin-bottom: 10px;
+   font-size:0.9rem;
+
+  }
+  .wrapper>header>.top-header>ul{
+      width:500px;
+      display:flex;
+      justify-content:right;
+      align-items : center;
+  }
+  .wrapper>header>.top-header>ul>li{
+      width : 100px;
+      height:30px;
+
+
+      text-align:center;
+      position:relative;
+
+  }
+  .wrapper>header>.top-header>ul>li::after{
+      content : "";
+      display:block;
+      position:absolute;
+      text-align:right;
+      left:120%;top:0px;
+  }
+  .wrapper>header>.top-header>ul>li:last-child::after
+  {
+      display:none;
+  }
+
+
+
+
+  /* header > .second-header */
+  .wrapper>header>.second-header{
+      height : 80px;
+      border-bottom: 1px solid lightgray;
+      position:relative;
+      display:flex;
+      justify-content: space-between;
+      align-items: center;
+  }
+  .wrapper>header>.second-header .material-symbols-outlined{
+      font-size:3.5rem;
+      color:gray;
+  }
+
+  .wrapper>header>.second-header>.left{
+
+      width : 500px;
+      height:100%;
+  }
+
+  .wrapper>header>.second-header>.left>ul{
+      height:100%;
+      width : 500px;
+      display:flex;
+      justify-content: center;
+      align-items: end;
+
+  }
+  .wrapper>header>.second-header>.left>ul>li{
+      width:80px;
+      height:30px;
+      font-size:0.7rem;
+      color:gray;
+      overflow: hidden;
+  }
+  .wrapper>header>.second-header>.left>ul>li img{
+      width:15px;
+      height:15px;
+      position:relative;
+  }
+
+
+
+  .wrapper>header>.second-header>.center{
+
+      height:100%;
+
+      display:flex;
+      justify-content: center;
+      align-items: center;
+  }
+
+  .wrapper>header>.second-header>.center>.logo{
+
+      width:200px;height:80px;
+      /* border : 1px solid gray; */
+      text-align: center;
+
+
+  }
+  .wrapper>header>.second-header>.center>.logo img{
+      width : 60%;
+      border-radius: 25%;
+  }
+
+  .wrapper>header>.second-header>.right{
+      width : 500px;
+      height:100%;
+
+
+  }
+  .wrapper>header>.second-header>.right>ul{
+      height:100%;
+      display:flex;
+      justify-content: right;
+      align-items: center;
+  }
+  .wrapper>header>.second-header>.right>ul>li{
+      width : 100px;
+      text-align:center;
+      margin-left:40px;
+
+  }
+  .wrapper>header>.second-header>.right .credit_card::after{
+      content : "마이페이지";
+      display:block;
+      text-align: center;
+      font-size:12px;
+
+
+  }
+  .wrapper>header>.second-header>.right .groups::after{
+      content : "단체관람/대관문의";
+      display:block;
+      text-align: center;
+      font-size:12px;
+
+  }
+  .wrapper>header>.second-header>.right .logout::after{
+
+      content : "로그아웃";
+      display:block;
+      text-align: center;
+      font-size:12px;
+  }
+  .wrapper>header>.second-header>.right .login::after{
+
+  content : "로그인";
+  display:block;
+  text-align: center;
+  font-size:12px;
+  }
+
+
+  /* nav */
+  .wrapper>nav{
+      height:30px;
+      /* border : 1px solid gray;   */
+      background-color: white;
+      position:relative;
+  }
+  .wrapper>nav>.mainmenu{
+
+      width :100%;
+      display:flex;
+      justify-content: center;
+      align-items: start;
+
+   }
+  .wrapper>nav>.mainmenu>li{
+      width : 200px;
+
+      text-align:center;
+
+  }
+  .wrapper>nav>.mainmenu>li>a{
+      display:block;
+      height:30px;
+
+  }
+  .wrapper>nav>.mainmenu>li>.submenu{
+      display:none;
+
+  }
+
+  .wrapper>nav>.mainmenu>li:hover .submenu{
+      position:absolute;
+      /* border : 1px solid gray; */
+      border-bottom: 1px solid lightgray;
+      left:0px;
+      width : 100%;
+      display:block;
+      display:flex;
+      justify-content : center;
+      font-size:0.9rem;
+      line-height:30px;
+      z-index: 2;
+      background-color: white;
+
+  }
+
+  .wrapper>nav>.mainmenu>li>.submenu>li{
+      height:30px;
+      text-align:center;
+      width : 120px;
+  }
+  .wrapper>nav>.mainmenu>li>.submenu>li>a{
+      display:block;
+
+  }
+
+  .top-banner{
+          width:100%;
+          height:70px;
+          background-color: beige;
+      }
+      .top-banner .header{
+          display:flex;
+          justify-content: right;
+          margin-left:20px;
+      }
+
+  .material-symbols-outlined {
+            font-variation-settings:
+            'FILL' 0,
+            'wght' 200,
+            'GRAD' 0,
+            'opsz' 24;
+            color:black;
+
+      }

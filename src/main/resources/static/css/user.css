@@ -1,0 +1,303 @@
+/* 전체 */
+.subjecet span{
+	margin-left: 31px;
+    font-size: 40px;
+    font-weight: 900;
+    color: white;
+}
+/* 마이페이지 버튼 줄 */
+.mypage-warp>.mypage {
+    margin-top: 30px;
+    padding-top: 35px;
+    display: flex;
+    justify-content: center;
+}
+.mypage-warp>.mypage>.mypage-menu::after {
+    display: block;
+    content: '';
+    clear: both;
+}
+.mypage-warp>.mypage>.mypage-menu>li {
+    margin-left: 200px;
+    float: left;
+    background-color: gray;
+}
+.mypage-warp>.mypage>.mypage-menu>li>button {
+    display: block;
+    position: relative;
+    padding-top: 80px;
+    width: 180px;
+    height: 120px;
+    text-align: center;
+    cursor: pointer;
+}
+.mypage-warp>.mypage>.mypage-menu>li>button>.img {
+    position: absolute;
+    left: 0;
+    top: 35px;
+    width: 100%;
+    text-align: center;
+}
+.mypage-warp>.mypage>.mypage-menu>li>button>.myChange1 {
+    font-size: 13px;
+    text-align: center;
+}
+.mypage-warp>.mypage>.mypage-menu>li>button>.myChange2 {
+    font-size: 13px;
+    text-align: center;
+}
+
+/* 회원 정보 수정 */
+.mypage-warp>.userChange {
+    display: none;
+    position: relative;
+    margin: 30px 50px 10px 50px;
+}
+/* 바로 아래 tip */
+.mypage-warp>.userChange>.tip {
+    display: block;
+    border-bottom: 1px solid black;
+    margin: 0 -30px;
+    padding: 20px 30px 5px;
+    font-size: 20px;
+    font-weight: bold;
+}
+.mypage-warp>.userChange>.user-update {
+    margin-top: 10px;
+}
+/* 각 항목 인풋 박스 */
+.mypage-warp>.userChange>.user-update>form>input {
+    width: 250px;
+    height: 25px;
+    border: 1px solid lightgray;
+}
+/* 각 항목 전송 버튼 */
+.mypage-warp>.userChange>.user-update>form>button {
+    display: inline-block;
+    font-weight: inherit;
+    text-align: center;
+    border: none;
+    border-radius: 2px;
+    color: white;
+    background-color: gray;
+    padding: 0 10px;
+    width: 100px;
+    height: 25px;
+    line-height: 25px;
+}
+.mypage-warp>.userChange>.user-update>.address_button {
+    display: inline-block;
+    font-weight: inherit;
+    text-align: center;
+    border: none;
+    border-radius: 2px;
+    color: white;
+    background-color: gray;
+    padding: 0 10px;
+    width: 100px;
+    height: 25px;
+    line-height: 25px;
+}
+/* 비밀번호 변경 버튼 */
+.mypage-warp>.userChange>.user-update>.pw-update>.pw-update-link {
+    display: inline-block;
+    font-weight: inherit;
+    text-align: center;
+    border: none;
+    border-radius: 2px;
+    color: white;
+    background-color: gray;
+    padding: 0 10px;
+    width: 100px;
+    height: 25px;
+    line-height: 25px;
+}
+/* 유효성 검사 문구 */
+.final_id_ck{
+	color : red;
+    display: none;
+}
+.final_name_ck{
+	color : red;
+    display: none;
+}
+.final_phone_ck{
+	color : red;
+    display: none;
+}
+.final_addr_ck{
+	color : red;
+    display: none;
+}
+
+/* 중복아이디 존재하지 않는 경우 */
+.id_input_re_1{
+	color : green;
+	display : none;
+}
+/* 중복아이디 존재하는 경우 */
+.id_input_re_2{
+	color : red;
+	display : none;
+}
+/* float 속성 해제 */
+.clearfix{
+	clear: both;
+}
+
+/* 회원 탈퇴 */
+.mypage-warp>.userWithdraw {
+    display: none;
+    margin: 100px;
+}
+.mypage-warp>.userWithdraw>#delete_form>.user-delete {
+    margin: 0 0 50px;
+}
+.mypage-warp>.userWithdraw>#delete_form>.user-delete>.sub-underline {
+    display: block;
+    border-bottom: 1px solid black;
+    margin: 0 -30px;
+    padding: 20px 30px 5px;
+    font-size: 20px;
+    font-weight: bold;
+}
+.mypage-warp>.userWithdraw>#delete_form>.user-delete>.id-check {
+    display: block;
+    position: relative;
+    margin: 29px 0 0;
+    padding: 0 0 23px;
+    border-bottom: 1px solid gray;
+}
+.mypage-warp>.userWithdraw>#delete_form>.user-delete>.id-check>.userDelete {
+    margin-left: 10px;
+}
+.mypage-warp>.userWithdraw>#delete_form>.user-delete>.id-check>label {
+    display: inline-block;
+    cursor: pointer;
+    padding: 0 0 0 25px;
+    height: 18px;
+    line-height: 18px;
+    vertical-align: top;
+}
+.mypage-warp>.userWithdraw>#delete_form>.user-delete>.id-check>#userDeleteChk {
+    position: absolute;
+    left: 3px; top: 3px;
+    width: 10px;
+    height: 10px;
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+#userDeleteChk[type="checkbox"] {
+   display:none;
+}
+.mypage-warp>.userWithdraw>#delete_form>.user-delete>.id-check>label::before {
+    position: absolute;
+    content: '';
+    left: 0; top: 0;
+    width: 18px;
+    height: 18px;
+    background: #fff no-repeat 0 0;
+    background-image: url(../image/ui-input.png);
+    background-size: 90px 18px;
+}
+.mypage-warp>.userWithdraw>#delete_form>.user-delete>.id-check>#userDeleteChk:checked + label::before {
+    background-image: url(../image/chk_8.png);
+    background-size: contain;
+}
+.mypage-warp>.userWithdraw>#delete_form>.delete-precaution {
+    margin: 0 0 20px;
+}
+.mypage-warp>.userWithdraw>#delete_form>.delete-precaution>.sub-underline2 {
+    display: block;
+    border-bottom: 1px solid black;
+    margin: 0 -30px;
+    padding: 0 30px 5px;
+    font-size: 20px;
+    font-weight: bold;
+}
+.mypage-warp>.userWithdraw>#delete_form>.delete-precaution>.row {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+    padding: 20px 0;
+    border-bottom: 1px solid gray;
+}
+.mypage-warp>.userWithdraw>#delete_form>.delete-precaution>.row>.warning {
+    margin: 20px 0;
+    line-height: 1.4;
+}
+.mypage-warp>.userWithdraw>#delete_form>.delete-precaution>.row>.warning>p {
+    position: relative;
+    margin: 15px 0 0;
+    padding: 0 0 0 10px;
+    font-size: 15px;
+    color: gray;
+}
+
+/* 업데이트 버튼 */
+.mypage-warp>.userChange>.update-btn-center {
+    text-align: center;
+    margin: ;
+}
+.mypage-warp>.userChange>.update-btn-center>.update-cancle-btn {
+    display: inline-block;
+    font-weight: inherit;
+    font-size: 15px;
+    text-align: center;
+    border: none;
+    border-radius: 2px;
+    color: white;
+    background-color: black;
+    padding: 0 10px;
+    width: 130px;
+    height: 40px;
+    line-height: 40px;
+}
+.mypage-warp>.userChange>.update-btn-center>.update-btn {
+    display: inline-block;
+    font-weight: inherit;
+    font-size: 15px;
+    text-align: center;
+    border: none;
+    border-radius: 2px;
+    color: white;
+    background-color: red;
+    padding: 0 10px;
+    width: 130px;
+    height: 40px;
+    line-height: 40px;
+}
+
+/* 삭제 버튼 */
+.mypage-warp>.userWithdraw>#delete_form>.delete-btn-center {
+    text-align: center;
+}
+.mypage-warp>.userWithdraw>#delete_form>.delete-btn-center>.delete-cancle-btn {
+    display: inline-block;
+    font-weight: inherit;
+    font-size: 15px;
+    text-align: center;
+    border: none;
+    border-radius: 2px;
+    color: white;
+    background-color: black;
+    padding: 0 10px;
+    width: 110px;
+    height: 40px;
+    line-height: 40px;
+}
+.mypage-warp>.userWithdraw>#delete_form>.delete-btn-center>.delete-btn {
+    display: inline-block;
+    font-weight: inherit;
+    font-size: 15px;
+    text-align: center;
+    border: none;
+    border-radius: 2px;
+    color: white;
+    background-color: red;
+    padding: 0 10px;
+    width: 130px;
+    height: 40px;
+    line-height: 40px;
+}

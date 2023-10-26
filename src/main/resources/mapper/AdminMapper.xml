@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.AdminMapper">
+
+    <!-- 영화 API 업데이트 -->
+    <insert id="movie_insert" parameterType="list">
+        INSERT INTO tbl_movie VALUES <foreach collection="list" item="item" separator=","> (#{item.movieId},#{item.movieName},#{item.movieRelease},#{item.movieRating},#{item.movieType},#{item.movieInfo})</foreach>
+        ON DUPLICATE KEY UPDATE
+        movieName = VALUES(movieName),
+        movieRelease = VALUES(movieRelease),
+        movieRating = VALUES(movieRating),
+        movieType = VALUES(movieType),
+        movieInfo = VALUES(movieInfo);
+    </insert>
+    <!-- 영화 API 이미지 업데이트 -->
+    <insert id="movie_image_insert" parameterType="list">
+        INSERT INTO tbl_image VALUES <foreach collection="list" item="item" separator=","> (#{item.imgId},#{item.imgLink})</foreach>
+        ON DUPLICATE KEY UPDATE
+        imgLink = VALUES(imgLink)
+    </insert>
+
+    <!-- 영화등록  -->
+    <insert id="insert">
+        INSERT INTO tbl_movie
+        (MOVIEID, MOVIENAME, MOVIERELEASE, MOVIERATING, MOVIETYPE, MOVIEINFO)
+        VALUES(#{movieId}, #{movieName}, #{movieRelease}, #{movieRating}, #{movieType}, #{movieInfo});
+    </insert>
+
+    <!-- 영화 삭제  -->
+    <delete id="delete">
+        DELETE FROM tbl_movie
+        WHERE MOVIEID = #{movieId}
+    </delete>
+
+    <!-- 영화 리스트 -->
+    <select id="movieGetList" resultType="com.example.demo.domain.dto.MovieDTO">
+        SELECT MOVIEID, MOVIENAME, MOVIERELEASE, MOVIERATING, MOVIETYPE, MOVIEINFO
+        FROM tbl_movie
+        ORDER BY
+        MOVIEID ASC
+        LIMIT #{skip}, #{amount}
+    </select>
+
+    <!-- 영화 총 갯수   -->
+    <select id="movieGetTotal" resultType="int">
+        SELECT COUNT(*) FROM tbl_movie
+    </select>
+
+    <!-- 영화 조회 페이지 -->
+    <select id="movieGetDetail" resultType="com.example.demo.domain.dto.MovieDTO">
+        SELECT M.MOVIEID, M.MOVIENAME, M.MOVIERELEASE, M.MOVIERATING, M.MOVIETYPE, M.MOVIEINFO,
+        (SELECT IMG_LINK FROM tbl_image I WHERE I.IMG_ID = M.MOVIEID) AS IMG_LINK
+        FROM tbl_movie M
+        WHERE MOVIEID = #{movieId}
+    </select>
+
+
+</mapper>

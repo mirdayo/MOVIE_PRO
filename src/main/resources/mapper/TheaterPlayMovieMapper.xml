@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.TheaterPlayMovieMapper">
+
+    <!-- 상영영화, 상영일자, 영화시작시간을 받아 조회 -->
+    <select id="findTheaterPlayMovieId" resultType="com.example.demo.domain.dto.TheaterPlayMovieDTO">
+        SELECT THEATERPLAYMOVIEID, CURRENTSEAT
+        FROM tbl_theaterplaymovie
+        WHERE PLAYMOVIE = #{playMovie} AND STARTDATE = #{startDate} AND STARTTIME = #{startTime} AND THEATERID = #{theaterId}
+    </select>
+
+    <!-- 총 좌석수 조회  -->
+    <select id="findTotalSeats" resultType="com.example.demo.domain.dto.TheaterPlayMovieDTO">
+        SELECT T1.THEATERPLAYMOVIEID, T2.TOTALSEATS, T1.THEATERID
+        FROM tbl_theaterplaymovie T1
+        JOIN tbl_theater T2 ON T1.THEATERID = T2.THEATERID
+    </select>
+
+    <update id="updateCurrentSeat">
+        UPDATE tbl_theaterplaymovie
+        SET currentSeat = currentSeat + #{seatChange}
+        WHERE theaterPlayMovieId = #{theaterPlayMovieId}
+    </update>
+
+</mapper>

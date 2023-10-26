@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>로그인</title>
+<!--    <link rel="stylesheet" type="text/css" href="/css/default.css"/>-->
+    <link rel="stylesheet" type="text/css" href="/css/header.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/login.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/footer.css"/>
+
+    <!-- sweetalert -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+
+    <!-- google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@350&display=swap" rel="stylesheet">
+
+
+    <!-- google icon -->
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
+
+
+    <!-- Swiper -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+            integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="wrapper">
+    <header>
+        <div class="top-header">
+            <ul>
+                <li th:if="${#authorization.expression('!hasRole(''ADMIN'') or isAnonymous()')}"><a
+                        th:href="@{/member/join}"> 회원가입 </a></li>
+                <li th:if="${#authorization.expression('!hasRole(''ADMIN'') or isAnonymous()')}"><a
+                        th:href="@{/member/reservation}"> 바로예매 </a></li>
+                <li th:if="${#authorization.expression('!hasRole(''ADMIN'') or isAnonymous()')}"><a href="">고객센터</a>
+                </li>
+                <li th:if="${#authorization.expression('hasRole(''ADMIN'')')}"><a th:href="@{admin/main}">관리자 페이지</a>
+                </li>
+                <li><a href="javascript:void(0)"><span class="material-symbols-outlined" data-bs-toggle="modal"
+                                                       data-bs-target="#exampleModal">menu</span></a></li>
+            </ul>
+        </div>
+
+
+        <div class="second-header">
+            <div class="left">
+                <ul class="sns">
+                    <li><a href=""><img src="/image/페이스북.png" alt="페이스북로고">&nbsp;페이스북</a></li>
+                    <li><a href="" style="width: 35px"><img src="/image/유튜브-removebg-preview.png" alt="유튜브로고">&nbsp;유튜브</a>
+                    </li>
+                    <li><a href=""><img src="/image/인스타그램.png" alt="인스타그램로고">&nbsp;인스타그램</a></li>
+                </ul>
+            </div>
+            <div class="center">
+                <div class="logo">
+                    <a th:href="@{/main}"><img src="/image/logo.jpg" /></a>
+                </div>
+
+            </div>
+            <div class="right">
+                <ul>
+                    <!-- 기본상태 -->
+                    <li sec:authorize="isAuthenticated()"><a th:href="@{/member/userInfo}"><span class="material-symbols-outlined credit_card">credit_card</span></a></li>  <!--멤버쉽-->
+                    <li th:if="${#authorization.expression('!hasRole(''ADMIN'') or isAnonymous()')}"><a href=""><span class="material-symbols-outlined groups">groups</span></a></li>            <!--단체관람/대관문의-->
+                    <li sec:authorize="isAuthenticated()"><a th:href="@{/member/logout}"><span class="material-symbols-outlined logout">logout</span></a></li>            <!--로그아웃-->
+                    <!-- 로그인상태 -->
+                    <li sec:authorize="isAnonymous()"><a th:href="@{/member/login}"><span class="material-symbols-outlined login">login</span></a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+
+    <nav>
+        <ul class="mainmenu">
+            <li><a href="">예매</a>
+                <ul class="submenu">
+                    <li><a href="">예매하기</a></li>
+                    <li><a href="">상영시간표</a></li>
+                    <li><a href="">할인안내</a></li>
+                </ul>
+            </li>
+            <li><a href="">영화</a>
+                <ul class="submenu">
+                    <li><a href="">홈</a></li>
+                    <li><a href="">현재상영작</a></li>
+                    <li><a href="">상영예정작</a></li>
+                    <li><a href="">아르떼</a></li>
+                    <li><a href="">국립극장</a></li>
+                </ul>
+            </li>
+            <li><a href="">영화관</a>
+                <ul class=submenu>
+                    <li><a href="">스페셜관</a></li>
+                    <li><a href="">서울</a></li>
+                    <li><a href="">경상/대구</a></li>
+                    <li><a href="">경기/인천</a></li>
+                    <li><a href="">강원</a></li>
+                </ul>
+            </li>
+            <li><a href="">이벤트</a>
+                <ul class="submenu">
+                    <li><a href="">홈</a></li>
+                    <li><a href="">영화</a></li>
+                    <li><a href="">시사회/무대인사</a></li>
+                    <li><a href="">HOT</a></li>
+                    <li><a href="">제휴할인</a></li>
+                    <li><a href="">우리동네영화관</a></li>
+                </ul>
+            </li>
+            <li><a href="">스토어</a>
+                <ul class="submenu">
+                    <li><a href="">베스트</a></li>
+                    <li><a href="">관람권</a></li>
+                    <li><a href="">스낵음료</a></li>
+                    <li><a href="">포토카드</a></li>
+                </ul>
+            </li>
+
+        </ul>
+    </nav>
+
+    <!-- 로그인 -->
+    <div class="login-contents">
+        <div class="login-main">
+            <ul class="login-ul">
+                <li class="active">
+                    <div class="top-btn">
+                        <button type="button" class="tab-member-btn">
+                            <span>회원</span>
+                        </button>
+                        <button type="button" class="tab-nonmember-btn">
+                            <span>비회원</span>
+                        </button>
+                    </div>
+                    <div class="tab_con">
+                        <div class="login-member">
+                            <div class="contents_inner">
+                                <div class="login-box">
+                                    <p class="tip">
+                                        기능이 제한된 비회원으로도 로그인이 가능합니다.
+                                    </p>
+                                    <form id="login_form" method="post">
+                                        <div class="login-area">
+                                            <input type="text" name="userId" id="userId" placeholder="아이디를 입력해 주세요."required/>
+                                            <br/>
+                                            <input type="password" name="userPw" id="userPw" placeholder="비밀번호를 입력해 주세요." required/>
+                                            <button type="submit" class="login-btn" id="loginButton">로그인</button>
+                                        </div>
+                                    </form>
+                                    <div class="login-bot">
+                                        <div class="login-check">
+                                            <input type="checkbox" name="logincheck" id="checksavedid"/>
+                                            <label for="checksavedid">아이디 저장</label>
+                                        </div>
+                                        <div class="login-menu">
+                                            <a th:href="@{/member/join}">회원가입</a>
+                                            <a href="#">아이디 찾기</a>
+                                            <a href="#">비밀번호 찾기</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="non-login-box">
+                                    <p class="tip">
+                                        지금 바로 회원가입 해보세요
+                                    </p>
+                                    <div class="non-login-area">
+                                        <label for="" id="username" style="padding-left: 47px;">이름</label> <input type="text" placeholder="이름을 입력해주세요.">
+                                        <hr/>
+                                        <label for="" id="phone">휴대폰번호</label> <input type="text" placeholder="휴대폰번호를 입력해주세요."> <button>인증</button>
+                                        <hr/>
+                                        <label for="" id="birth" style="padding-left: 15px;">생년월일</label>
+                                        <select id="year-select"></select>
+                                        <select id="month-select"></select>
+                                        <select id="day-select"></select>
+                                        <hr/>
+                                        <label for="" id="address" style="padding-left: 45px;">주소</label>
+                                        <input type="text" name= "zipcode" id="postcode" placeholder="우편번호를 입력하세요">
+                                        <button class="btn-secondary" onclick="searchZip()">우편번호검색</button>
+                                        <input type="text" name="addr1" id="defaultAddress" placeholder="기본주소 입력"  class="form-control" style=width:300px;/>
+                                        <input type="text" name="addr2"  placeholder="상세주소 입력" class="form-control"  style=width:200px;/>
+                                    </div>
+                                    <ul class="non-list">
+                                        <li>비회원 로그인 시 영화 조회 메뉴만 이용 가능하며 일부 서비스의 경우 정회원 로그인 시에만 사용 가능 합니다.</li>
+                                    </ul>
+                                    <div class="non-bottom-btn">
+                                        <a th:href="@{/member/join}" class="join-member">회원가입</a>
+                                        <a href="#" class="non-login-btn">비회원 로그인</a>
+                                    </div>
+                                </div>
+                                <section class="f-section">
+                                    <div class="swiper">
+                                        <div class="swiper-wrapper">
+                                            <div class="swiper-slide">
+                                                <!-- 광고 이미지 -->
+                                                <a href="#none"><img src="/image/q858v6_s5qv-ya5to3_logo.png" alt=""></a>
+                                            </div>
+                                            <div class="swiper-slide">
+                                                <!-- 광고 이미지 -->
+                                                <a href="#none"><img src="/image/q858v6_s5qv-ya5to3_logo.png" alt=""></a>
+                                            </div>
+                                            <div class="swiper-slide">
+                                                <!-- 광고 이미지 -->
+                                                <a href="#none"><img src="/image/q858v6_s5qv-ya5to3_logo.png" alt=""></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- 하단 광고 배너 -->
+    <div class="banner_section">
+        <div class="bot_banner">
+            <!-- 광고 이미지 -->
+            <a href="#none"><img src="" alt=""></a>
+        </div>
+    </div>
+    <!-- 왼쪽 사이드 배너 -->
+    <div class="left_section">
+        <div class="left_banner">
+            <!-- 광고 배너 이미지 -->
+            <a href=""><img src="/image/RUBYGILLMAN_145145.png" alt=""></a>
+        </div>
+        <!-- 광고 닫는 버튼 -->
+        <button class="banner_close"></button>
+    </div>
+    <!-- 오른쪽 사이드 배너 -->
+    <div class="quick_section">
+        <div class="quick_menu">
+            <!-- 퀵메뉴 이미지 -->
+            <a th:href="@{/member/reservation}"><img src="/image/961c9cbf311b4f1299827c21a61fab76.png" alt=""></a>
+            <a href="#none"><img src="/image/c1dbce4f91e948498c7c78239b7157ac.png" alt=""></a>
+            <a href="#none"><img src="/image/c793af89f3b648aa99cc679186ccfa02.png" alt=""></a>
+            <!-- 최상단 올라가기 버튼 -->
+            <a href="#none" class="quick_top" id="to_top">TOP</a>
+        </div>
+    </div>
+    <!-- 로그인 끝 -->
+
+    <footer th:fragment="content">
+        <div class="footer">
+            <div class="inner">
+				<span class="footerlogo"> <img
+                        src="/image/logo3.png" alt="">
+				</span>
+                <ul class="footermenu">
+                    <li><a href="#">이용약관</a></li>
+                    <li><a href="#">개인정보처리방침</a></li>
+                    <li><a href="#">이메일무단수집거부</a></li>
+                    <li><a href="#">영상정보처리기기 운영 및 관리방침</a></li>
+                    <li><a href="#">L.POINT회원안내</a></li>
+                    <li><a href="#">배정기준</a></li>
+                    <li><a href="#">채용안내</a></li>
+                    <li><a href="#">광고/임대문의</a></li>
+                    <li><a href="#">기업정보</a></li>
+                    <li><a href="#">사회적책임</a></li>
+                </ul>
+                <div class="address">
+                    <address>서울특별시 송파구 올림픽로 300 롯데월드타워 27층</address>
+                    <span class="bar">고객센터 1544-8855 (유료)</span><br> <span
+                        class="bar">대표이사 4조</span> <span class="bar">사업자등록번호
+						111-11-11111</span> <span class="bar">통신판매업신고번호 제1111호</span> <span
+                        class="bar">개인정보보호책임자 4조</span>
+                </div>
+                <p class="copyright" style="font-size: 12px;">COPYRIGHT LOTTE
+                    CINEMA ALL RIGHT RESERVED.</p>
+            </div>
+        </div>
+    </footer>
+</div>
+
+
+<!-- 자바 스크립트 -->
+<!-- 제이쿼리 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<!-- lodash cdn -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js" integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<!-- Swiper -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+<!-- sweetalert -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
+<!-- 우편 검색 -->
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script type="text/javascript" src="/js/login.js"></script>
+<script type="text/javascript" src="/js/daumaddr.js"></script>
+
+</body>
+</html>

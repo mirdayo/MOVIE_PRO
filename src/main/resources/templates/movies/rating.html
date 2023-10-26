@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<link rel="stylesheet" href="/css/default.css" />
+	<link rel="stylesheet" href="/css/header.css" />
+	<link rel="stylesheet" href="/css/rating.css" />
+	<link rel="stylesheet" href="/css/footer.css" />
+</head>
+<body>
+<div class="movie-list">
+	<ul class="movie-ul">
+		<li th:each="movie : ${list}" th:text="${movie.playMovie}" th:data-img-link="${movie.imgLink}" onclick='selectMovie(this.innerText, this.dataset.imgLink)'></li>
+	</ul>
+</div>
+<script type='text/javascript'>
+	function selectMovie(playMovie, imgLink) {
+        localStorage.setItem('selectedMovie', playMovie);
+        localStorage.setItem('selectedImage', imgLink);
+        window.close();  // 선택 후 팝업 창 닫기
+    }
+</script>
+</body>
+</html>

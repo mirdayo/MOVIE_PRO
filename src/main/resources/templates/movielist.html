@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="">
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+    <link rel="stylesheet" href="/css/movielist.css" />
+    <script
+            src="https://code.jquery.com/jquery-3.4.1.js"
+            integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+            crossorigin="anonymous"></script>
+
+</head>
+<body>
+<h1>목록 페이지입니다.</h1>
+
+<div class="table_wrap">
+    <a th:href="@{/movielist}" class="top_btn">영화 목록</a>
+    <div class="search_wrap">
+        <form name="searchForm" th:action="@{/movielist}" method="get">
+            <input type="hidden" name="page" th:value="*{pageNum}">
+            <span class="bunch">
+                <select name="type" id="sFld">
+                  <option value="tw" th:selected="${search.type == 'tw'}">전체</option>
+                  <option value="t" th:selected="${search.type == 't'}">제목</option>
+                  <option value="w" th:selected="${search.type == 'w'}">장르</option>
+                  <input type="text" name="keyword" id="sStr" th:value="${search.keyword}" placeholder="검색어를 입력해주세요">
+                </select>
+            </span>
+            <span class="bunch">
+                <button type="submit" class="btn_search">검색</button>
+            </span>
+        </form>
+        <div>
+            검색 수 <span th:text="${totalMovieCount}"></span> 건
+        </div>
+    </div>
+    <table>
+        <thead>
+        <tr>
+            <th class="movieId">번호</th>
+            <th class="movieName">제목</th>
+            <th class="movieRelease">개봉일</th>
+            <th class="movieRating">평점</th>
+            <th class="movieType">장르</th>
+            <th class="movieInfo">줄거리</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr th:each = "movie : ${list}">
+                <td th:text ="${movie.movieId}"></td>
+                <td th:text ="${movie.movieName}"></td>
+                <td th:text ="${movie.movieRelease}"></td>
+                <td th:text ="${movie.movieRating}"></td>
+                <td th:text ="${movie.movieType}"></td>
+                <td th:text ="${movie.movieInfo}"></td>
+            </tr>
+        </tbody>
+    </table>
+    <div class ="pageInfo_wrap">
+        <div class="pageInfo_area">
+            <ul id="pageInfo" class="pageInfo">
+                <!-- 이전페이지 버튼 -->
+                <li class="pageInfo_btn previous" th:if="${pageMaker.prev}">
+                    <a th:href="@{movielist(pageNum=${pageMaker.startPage-1}, amount=${pageMaker.criteria.amount}, type=${search.type}, keyword=${search.keyword})}">Prev</a>
+                </li>
+
+                <!-- 페이지 번호 버튼 -->
+                <li th:each="num : ${#numbers.sequence(pageMaker.startPage, pageMaker.endPage)}"
+                    class="pageInfo_btn" th:classappend="${num == pageMaker.criteria.pageNum} ? 'active' : ''">
+                    <a th:href="@{movielist(pageNum=${num}, amount=${pageMaker.criteria.amount}, type=${search.type}, keyword=${search.keyword})}" th:text="${num}"></a>
+                </li>
+
+                <!-- 다음페이지 버튼 -->
+                <li class="pageInfo_btn next" th:if="${pageMaker.next}">
+                    <a th:href="@{movielist(pageNum=${pageMaker.endPage + 1}, amount=${pageMaker.criteria.amount}, type=${search.type}, keyword=${search.keyword})}">Next</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <form id="moveForm" method="get">
+        <!-- pageNum 값을 숫자로 변환하여 대체 -->
+        <input type="hidden" name="pageNum" th:attr="value=${pageMaker.criteria.pageNum}">
+        <!-- amount 값을 숫자로 변환하여 대체 -->
+        <input type="hidden" name="amount" th:attr="value=${pageMaker.criteria.amount}">
+    </form>
+</div>
+<script type="text/javascript" src="/js/movielist.js"></script>
+</body>
+</html>

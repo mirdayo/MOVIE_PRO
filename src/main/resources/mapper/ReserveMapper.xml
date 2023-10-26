@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.ReserveMapper">
+
+    <!-- 결제정보 DB 추가 -->
+    <insert id="insertReserve" parameterType="com.example.demo.domain.dto.ReserveDTO">
+        INSERT INTO tbl_reserve
+        VALUES (#{reserveId}, #{userId}, #{theaterPlayMovieId}, #{movieName}, #{reserveDate},
+        #{startDate}, #{startTime}, #{endTime}, #{selectSeat},
+        #{selectSeatNum}, #{priceTotal})
+    </insert>
+
+    <!-- 영화 시트 조회 -->
+    <select id="getReservedSeats" resultType="string" parameterType="int">
+        SELECT selectSeat FROM tbl_reserve WHERE theaterPlayMovieId = #{theaterPlayMovieId}
+    </select>
+
+</mapper>

@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<!--    <link rel="stylesheet" type="text/css" href="/css/default.css"/>-->
+    <link rel="stylesheet" type="text/css" href="/css/header.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/footer.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/user.css"/>
+    <!-- sweetalert -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+
+    <!-- google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@350&display=swap" rel="stylesheet">
+
+
+    <!-- google icon -->
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
+
+</head>
+
+<body>
+<div class="wrapper">
+    <header>
+        <div class="top-header">
+            <ul>
+                <li th:if="${#authorization.expression('!hasRole(''ADMIN'') or isAnonymous()')}"><a
+                        th:href="@{/member/join}"> 회원가입 </a></li>
+                <li th:if="${#authorization.expression('!hasRole(''ADMIN'') or isAnonymous()')}"><a
+                        th:href="@{/member/reservation}"> 바로예매 </a></li>
+                <li th:if="${#authorization.expression('!hasRole(''ADMIN'') or isAnonymous()')}"><a href="">고객센터</a>
+                </li>
+                <li th:if="${#authorization.expression('hasRole(''ADMIN'')')}"><a th:href="@{admin/main}">관리자 페이지</a>
+                </li>
+                <li><a href="javascript:void(0)"><span class="material-symbols-outlined" data-bs-toggle="modal"
+                                                       data-bs-target="#exampleModal">menu</span></a></li>
+            </ul>
+        </div>
+
+
+        <div class="second-header">
+            <div class="left">
+                <ul class="sns">
+                    <li><a href=""><img src="/image/페이스북.png" alt="페이스북로고">&nbsp;페이스북</a></li>
+                    <li><a href="" style="width: 35px"><img src="/image/유튜브-removebg-preview.png" alt="유튜브로고">&nbsp;유튜브</a>
+                    </li>
+                    <li><a href=""><img src="/image/인스타그램.png" alt="인스타그램로고">&nbsp;인스타그램</a></li>
+                </ul>
+            </div>
+            <div class="center">
+                <div class="logo">
+                    <a th:href="@{/main}"><img src="/image/logo.jpg" /></a>
+                </div>
+
+            </div>
+            <div class="right">
+                <ul>
+                    <!-- 로그인상태 -->
+                    <li th:if="${#authorization.expression('!hasRole(''ADMIN'') or isAnonymous()')}"><a
+                            th:href="@{/member/userInfo}"><span class="material-symbols-outlined credit_card">credit_card</span></a>
+                    </li>  <!--멤버쉽-->
+                    <li th:if="${#authorization.expression('!hasRole(''ADMIN'') or isAnonymous()')}"><a href=""><span
+                            class="material-symbols-outlined groups">groups</span></a></li>            <!--단체관람/대관문의-->
+                    <li sec:authorize="isAuthenticated()"><a th:href="@{/member/logout}"><span
+                            class="material-symbols-outlined logout">logout</span></a></li>            <!--로그아웃-->
+                    <!-- 기본상태 -->
+                    <li sec:authorize="isAnonymous()"><a th:href="@{/member/login}"><span
+                            class="material-symbols-outlined login">login</span></a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+
+    <nav>
+        <ul class="mainmenu">
+            <li><a href="">예매</a>
+                <ul class="submenu">
+                    <li><a href="">예매하기</a></li>
+                    <li><a href="">상영시간표</a></li>
+                    <li><a href="">할인안내</a></li>
+                </ul>
+            </li>
+            <li><a href="">영화</a>
+                <ul class="submenu">
+                    <li><a href="">홈</a></li>
+                    <li><a href="">현재상영작</a></li>
+                    <li><a href="">상영예정작</a></li>
+                    <li><a href="">아르떼</a></li>
+                    <li><a href="">국립극장</a></li>
+                </ul>
+            </li>
+            <li><a href="">영화관</a>
+                <ul class=submenu>
+                    <li><a href="">스페셜관</a></li>
+                    <li><a href="">서울</a></li>
+                    <li><a href="">경상/대구</a></li>
+                    <li><a href="">경기/인천</a></li>
+                    <li><a href="">강원</a></li>
+                </ul>
+            </li>
+            <li><a href="">이벤트</a>
+                <ul class="submenu">
+                    <li><a href="">홈</a></li>
+                    <li><a href="">영화</a></li>
+                    <li><a href="">시사회/무대인사</a></li>
+                    <li><a href="">HOT</a></li>
+                    <li><a href="">제휴할인</a></li>
+                    <li><a href="">우리동네영화관</a></li>
+                </ul>
+            </li>
+            <li><a href="">스토어</a>
+                <ul class="submenu">
+                    <li><a href="">베스트</a></li>
+                    <li><a href="">관람권</a></li>
+                    <li><a href="">스낵음료</a></li>
+                    <li><a href="">포토카드</a></li>
+                </ul>
+            </li>
+
+        </ul>
+    </nav>
+    <div class="mypage-warp">
+        <div class="mypage">
+            <ul class="mypage-menu">
+                <li>
+                    <button class="tab-update">
+                        <span class="img"><img src="/image/ic_my_menu_1.png" alt=""></span>
+                        <span class="myChange">회원 정보 변경</span>
+                    </button>
+                </li>
+                <li>
+                    <button class="tab-delete">
+                        <span class="img"><img src="/image/ic_my_menu_5.png" alt=""></span>
+                        <span class="myChange2">회원 탈퇴</span>
+                    </button>
+                </li>
+            </ul>
+        </div>
+        <!-- 회원 정보 수정 -->
+        <div class="userChange">
+            <p class="tip">
+                회원 정보입력
+            </p>
+            <div class="user-update">
+                <form id="id-update-form" method="post">
+                    <label for="userId" style="padding-left: 65px;">ID</label> <input type="text" name="userId"
+                                                                                      id="userId" class="id_input"
+                                                                                      placeholder="ID를 입력해주세요."
+                                                                                      readonly="readonly"
+                                                                                      th:value="${#authentication.principal.getUserId()}">
+                    <span class="id_input_re_1">사용 가능한 아이디입니다.</span>
+                    <span class="id_input_re_2">아이디가 이미 존재합니다.</span>
+                    <span class="final_id_ck">아이디를 입력해주세요.</span>
+                </form>
+                <hr/>
+                <div class="pw-update">
+                    <label for="" style="padding-left: 65px;">PW</label>
+                    <a href="/member/passCheck" class="pw-update-link">비밀번호 변경</a>
+                </div>
+                <hr/>
+                <form id="name-update-form" method="post">
+                    <label for="userName" style="padding-left: 47px;">이름</label> <input type="text" name="userName"
+                                                                                        id="userName" class="user_input"
+                                                                                        placeholder="이름을 입력해주세요."
+                                                                                        th:value="${#authentication.principal.getActualUserName()}">
+                    <span class="final_name_ck">이름을 입력해주세요.</span>
+                    <button type="submit" class="name-save">전송</button>
+                </form>
+                <hr/>
+                <form id="phone-update-form" method="post">
+                    <label for="userPhone">휴대폰번호</label> <input type="text" name="userPhone" id="userPhone"
+                                                                class="phone_input" placeholder="휴대폰번호를 입력해주세요."
+                                                                th:value="${#authentication.principal.getUserPhone()}">
+                    <span class="final_phone_ck">전화번호를 입력해주세요.</span>
+                    <button type="submit" class="phone-save">전송</button>
+                </form>
+                <hr/>
+                <!--            <label for="" id="birth" style="padding-left: 15px;">생년월일</label>-->
+                <!--            <select id="year-select"></select>-->
+                <!--            <select id="month-select"></select>-->
+                <!--            <select id="day-select"></select>-->
+                <!--            <hr/>-->
+                <form id="addr-update-form" method="post">
+                    <label for="postcode" id="address" style="padding-left: 45px;">주소</label>
+                    <input type="text" class="address_input_1" name="userAddr1" id="postcode" placeholder="우편번호를 입력하세요"
+                           readonly="readonly" th:value="${#authentication.principal.getUserAddr1()}">
+                    <div class="clearfix"></div>
+                    <input type="text" class="address_input_2" name="userAddr2" id="defaultAddress"
+                           placeholder="기본주소 입력" style=width:300pxreadonly="readonly"
+                           th:value="${#authentication.principal.getUserAddr2()}">
+                    <input type="text" class="address_input_3" name="userAddr3" placeholder="상세주소 입력" style=width:200px;
+                           th:value="${#authentication.principal.getUserAddr3()}">
+                    <span class="final_addr_ck">주소를 입력해주세요.</span>
+                    <button type="submit" class="addr-save">전송</button>
+                </form>
+                <button class="address_button" onclick="execution_daum_address()"><span>주소 찾기</span></button>
+                <hr/>
+            </div>
+            <ul class="non-list" style="color:red;">
+                <li>필수 정보에 대해 정확히 확인해 주시기 바랍니다.</li>
+            </ul>
+            <div class="update-btn-center">
+                <button class="update-cancle-btn">나가기</button>
+            </div>
+        </div>
+        <!-- 회원 탈퇴 -->
+        <div class="userWithdraw">
+            <form id="delete_form" method="post">
+                <div class="user-delete">
+                    <h3 class="sub-underline">아이디 선택</h3>
+                    <div class="id-check">
+                        <input type="checkbox" name="" id="userDeleteChk">
+                        <label for="userDeleteChk"></label>
+                        <input type="text" name="userId" class="userDelete"
+                               th:value="${#authentication.principal.getUserId()}">
+                    </div>
+                </div>
+                <div class="delete-precaution">
+                    <h3 class="sub-underline2">유의사항</h3>
+                    <div class="row">
+                        <div class="warning">
+                            <p>- 어쩌구 저쩌구</p>
+                            <p>- 어쩌구 저쩌구</p>
+                            <p>- 어쩌구 저쩌구</p>
+                            <p>- 어쩌구 저쩌구</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="delete-btn-center">
+                    <button type="submit" class="delete-btn">탈퇴</button>
+                    <a href="/member/userInfo" class="delete-cancle-btn">취소</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <th:block th:replace="~{includes/footer.html :: content}"></th:block>
+</div>
+
+    <!-- 자바 스크립트 -->
+    <!-- 제이쿼리 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- lodash cdn -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"
+            integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- Swiper -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <!-- 우편 검색 -->
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+    <script type="text/javascript" src="/js/main.js"></script>
+    <script type="text/javascript" src="/js/daumaddr.js"></script>
+    <script type="text/javascript" src="/js/userInfo.js"></script>
+
+</body>
+</html>

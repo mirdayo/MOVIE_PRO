@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.MemberMapper">
+    <!-- 회원가입 -->
+    <insert id="memberJoin">
+        INSERT INTO tbl_member
+        VALUES (#{userId}, #{userPw}, #{userName}, #{userAddr1}, #{userAddr2}, #{userAddr3}, #{userPhone}, 0 )
+    </insert>
+
+    <!-- 아이디 중복검사 -->
+    <select id="idCheck" resultType="int">
+        SELECT COUNT(*) FROM tbl_member WHERE USERID = #{userId}
+    </select>
+
+    <!-- 로그인 -->
+    <select id="memberLogin" resultType="com.example.demo.domain.dto.MemberDTO">
+        SELECT USERID as userId, USERNAME as userName, USERROLE as userRole
+        FROM tbl_member WHERE USERID = #{userId} and USERPW = #{userPw}
+    </select>
+
+    <select id="findByUserId" resultType="com.example.demo.domain.dto.MemberDTO">
+        SELECT USERID, USERPW, USERNAME, USERROLE
+        FROM tbl_member WHERE USERID = #{userId}
+    </select>
+
+    <select id="getMember" resultType="com.example.demo.domain.dto.MemberDTO">
+        SELECT * FROM tbl_member WHERE USERID = #{userId}
+    </select>
+
+    <!-- 정보 수정 -->
+    <update id="PostPwUpdate" parameterType="String">
+        UPDATE tbl_member SET USERPW = #{userPw} WHERE USERID = #{userId};
+    </update>
+    <update id="PostNameUpdate" parameterType="String">
+        UPDATE tbl_member SET USERNAME = #{userName} WHERE USERID = #{userId};
+    </update>
+    <update id="PostPhoneUpdate" parameterType="String">
+        UPDATE tbl_member SET USERPHONE = #{userPhone} WHERE USERID = #{userId};
+    </update>
+    <update id="PostAddrUpdate" parameterType="String">
+        UPDATE tbl_member SET USERADDR1 = #{userAddr1}, USERADDR2 = #{userAddr2}, USERADDR3 = #{userAddr3} WHERE USERID = #{userId};
+    </update>
+    <!-- 현재 pw 확인 -->
+    <select id="checkPassword" resultType="String">
+        SELECT USERPW FROM tbl_member WHERE USERID = #{userId}
+    </select>
+    <!-- 회원 탈퇴 -->
+    <delete id="PostUserDelete">
+        DELETE FROM tbl_member WHERE USERID = #{userId};
+    </delete>
+
+</mapper>

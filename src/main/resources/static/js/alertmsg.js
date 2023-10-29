@@ -22,7 +22,7 @@ $(document).ready(function(){
                         confirmButtonText: '확인'
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            window.location.href = "/main"; // 로그인 후 이동할 URL
+                            window.location.href = "/index"; // 로그인 후 이동할 URL
                         }
                     });
                 } else {

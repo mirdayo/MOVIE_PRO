@@ -42,7 +42,7 @@ $(document).ready(function(){
                 success: function(data) {
                     // 성공 시 처리
                     alert('회원탈퇴가 성공적으로 진행되었습니다!');
-                    window.location.href = "/main";
+                    window.location.href = "/index";
                 },
                 error: function(err) {
                     // 실패 시 처리

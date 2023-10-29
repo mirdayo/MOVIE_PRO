@@ -2,87 +2,98 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:c="http://www.w3.org/1999/XSL/Transform"
       xmlns:sec="http://www.w3.org/1999/xhtml">
 
-<header th:fragment="content">
-    <div id="header_section" class="header">
-        <h1 class="logo">
-            <a th:href="@{/main}"></a>
-        </h1>
-        <div class="gnb">
-            <ul class="menu1">
-                <li><a href=""><img src="/image/페이스북.png"
-                                    alt="페이스북로고"></a></li>
-                <li><a href="" style="width: 35px"><img
-                        src="/image/유튜브-removebg-preview.png" alt="유튜브로고"></a></li>
-                <li><a href=""><img src="/image/인스타그램.png"
-                                    alt="인스타그램로고"></a></li>
+<!-- 맨 위 광고 -->
+<div class="top-banner" th:fragment="top-banner">
+    <div class="header"><a href="javascript:void(0)" class="top-banner-btn"><span class="material-symbols-outlined">close</span></a></div>
+</div>
+
+<header th:fragment="header">
+
+    <div class="top-header">
+        <ul>
+            <li sec:authorize="isAnonymous()"><a th:href="@{/member/join}"> 회원가입 </a></li>
+            <li th:if="${#authorization.expression('!hasRole(''ADMIN'') or isAnonymous()')}"><a th:href="@{/member/reservation}"> 바로예매 </a></li>
+            <li th:if="${#authorization.expression('!hasRole(''ADMIN'') or isAnonymous()')}"><a href="">고객센터</a></li>
+            <li th:if="${#authorization.expression('hasRole(''ADMIN'')')}"><a th:href="@{/admin/main}">관리자 페이지</a></li>
+            <li><a href="javascript:void(0)"><span class="material-symbols-outlined" data-bs-toggle="modal" data-bs-target="#exampleModal">menu</span></a></li>
+        </ul>
+    </div>
+
+
+    <div class="second-header">
+        <div class="left">
+            <ul class="sns">
+                <li><a href="https://www.facebook.com/"><img src="/image/페이스북.png" alt="페이스북로고">&nbsp;페이스북</a></li>
+                <li><a href="https://www.youtube.com/" style="width: 35px"><img src="/image/유튜브-removebg-preview.png" alt="유튜브로고">&nbsp;유튜브</a></li>
+                <li><a href="https://www.instagram.com/"><img src="/image/인스타그램.png" alt="인스타그램로고">&nbsp;인스타그램</a></li>
             </ul>
-            <ul class="menu2">
-                <!-- 로그인 했을 때 -->
-                <li sec:authorize="hasRole('ADMIN')"><a href="">관리자 페이지</a></li>
-                <li><a href="">멤버십</a></li>
-                <li><a href="">고객센터</a></li>
-                <li><a href="">단체관람/대관문의</a></li>
-                <div sec:authorize="isAnonymous()">
-                    <li id="loginLink"><a th:href="@{/member/login}">로그인</a></li>
-                </div>
-                <div sec:authorize="isAuthenticated()">
-                    <li id="logoutLink"><a th:href="@{/member/logout}">로그아웃</a></li>
-                </div>
-            </ul>
-            <ul class="menu3">
-                <li th:if="${#authorization.expression('hasRole(''USER'')')}"><a th:href="@{/member/userInfo}">마이페이지</a></li>
-                <li th:if="${#authorization.expression('isAnonymous()')}"><a th:href="@{/member/join}">회원가입</a></li>
-                <li><a th:href="@{/member/reservation}">바로예매</a></li>
-                <li><a href=""><img src="/image/햄버거버튼.png"></a></li>
-            </ul>
-            <div class="nav">
-                <ul class="submenu">
-                    <li><a href="">예매</a>
-                        <ul class="submenu1">
-                            <li><a href="">예매하기</a></li>
-                            <li><a href="">상영시간표</a></li>
-                            <li><a href="">할인안내</a></li>
-                        </ul></li>
-                    <li><a href="">영화</a>
-                        <ul class="submenu2">
-                            <li><a href="">홈</a></li>
-                            <li><a href="">현재상영작</a></li>
-                            <li><a href="">상영예정작</a></li>
-                            <li><a href="">아르떼</a></li>
-                            <li><a href="">국립극장</a></li>
-                        </ul></li>
-                    <li><a href="">영화관</a>
-                        <ul class=submenu3>
-                            <li><a href="">스페셜관</a></li>
-                            <li><a href="">서울</a></li>
-                            <li><a href="">경기/인천</a></li>
-                            <li><a href="">충청/대전</a></li>
-                            <li><a href="">전라/광주</a></li>
-                            <li><a href="">경상/대구</a></li>
-                            <li><a href="">경상/부산/울산</a></li>
-                            <li><a href="">강원</a></li>
-                            <li><a href="">제주</a></li>
-                        </ul></li>
-                    <li><a href="">이벤트</a>
-                        <ul class="submenu4">
-                            <li><a href="">홈</a></li>
-                            <li><a href="">영화</a></li>
-                            <li><a href="">시사회/무대인사</a></li>
-                            <li><a href="">HOT</a></li>
-                            <li><a href="">제휴할인</a></li>
-                            <li><a href="">우리동네영화관</a></li>
-                        </ul></li>
-                    <li><a href="">스토어</a>
-                        <ul class="submenu5">
-                            <li><a href="">베스트</a></li>
-                            <li><a href="">관람권</a></li>
-                            <li><a href="">스낵음료</a></li>
-                            <li><a href="">포토카드</a></li>
-                        </ul></li>
-                    <li><a href=""></a>
-                        <ul></ul></li>
-                </ul>
+        </div>
+        <div class="center">
+            <div class="logo">
+                <a th:href="@{/index}"><img src="/image/logo.jpg" /></a>
             </div>
+
+        </div>
+        <div class="right">
+            <ul>
+                <!-- 기본상태 -->
+                <li sec:authorize="isAuthenticated()"><a th:href="@{/member/userInfo}"><span class="material-symbols-outlined credit_card">credit_card</span></a></li>
+                <li th:if="${#authorization.expression('!hasRole(''ADMIN'') or isAnonymous()')}"><a href=""><span class="material-symbols-outlined groups">groups</span></a></li>
+                <!--로그아웃-->
+                <li sec:authorize="isAuthenticated()"><a th:href="@{/member/logout}"><span class="material-symbols-outlined logout">logout</span></a></li>
+                <!-- 로그인 -->
+                <li sec:authorize="isAnonymous()"><a th:href="@{/member/login}"><span class="material-symbols-outlined login">login</span></a></li>
+            </ul>
         </div>
     </div>
 </header>
+
+
+<nav th:fragment="nav">
+    <ul class="mainmenu">
+        <li><a href="">예매</a>
+            <ul class="submenu">
+                <li><a href="">예매하기</a></li>
+                <li><a href="">상영시간표</a></li>
+                <li><a href="">할인안내</a></li>
+            </ul>
+        </li>
+        <li><a href="">영화</a>
+            <ul class="submenu">
+                <li><a href="">홈</a></li>
+                <li><a href="">현재상영작</a></li>
+                <li><a href="">상영예정작</a></li>
+                <li><a href="">아르떼</a></li>
+                <li><a href="">국립극장</a></li>
+            </ul>
+        </li>
+        <li><a href="">영화관</a>
+            <ul class=submenu>
+                <li><a href="">스페셜관</a></li>
+                <li><a href="">서울</a></li>
+                <li><a href="">경상/대구</a></li>
+                <li><a href="">경기/인천</a></li>
+                <li><a href="">강원</a></li>
+            </ul>
+        </li>
+        <li><a href="">이벤트</a>
+            <ul class="submenu">
+                <li><a href="">홈</a></li>
+                <li><a href="">영화</a></li>
+                <li><a href="">시사회/무대인사</a></li>
+                <li><a href="">HOT</a></li>
+                <li><a href="">제휴할인</a></li>
+                <li><a href="">우리동네영화관</a></li>
+            </ul>
+        </li>
+        <li><a href="">스토어</a>
+            <ul class="submenu">
+                <li><a href="">베스트</a></li>
+                <li><a href="">관람권</a></li>
+                <li><a href="">스낵음료</a></li>
+                <li><a href="">포토카드</a></li>
+            </ul>
+        </li>
+
+    </ul>
+</nav>

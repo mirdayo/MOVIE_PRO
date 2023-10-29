@@ -1,125 +1,50 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>회원가입</title>
-    <!--    <link rel="stylesheet" type="text/css" href="/css/default.css"/>-->
+    <link rel="stylesheet" type="text/css" href="/css/default.css"/>
     <link rel="stylesheet" type="text/css" href="/css/header.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/footer.css"/>
     <link rel="stylesheet" type="text/css" href="/css/join.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/footer.css"/>
+
+    <!-- Jquery -->
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
     <!-- google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@350&display=swap" rel="stylesheet">
 
-
     <!-- google icon -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <style>
+        .material-symbols-outlined {
+          font-variation-settings:
+          'FILL' 0,
+          'wght' 200,
+          'GRAD' 0,
+          'opsz' 24;
+          color:black;
+        }
+    </style>
 
+    <!-- Swiper cdn -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
 
-    <!-- Swiper -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"/>
+    <!-- sweetalert -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
-    <script src="https://code.jquery.com/jquery-3.4.1.js"
-            integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-            crossorigin="anonymous"></script>
-
-    <!--<style>-->
-
-    <!--</style>-->
 </head>
 
 <body>
+
+<!-- header -->
+<th:block th:replace="~{includes/header.html :: top-banner}"></th:block>
+<th:block th:replace="~{includes/header.html :: header}"></th:block>
+<th:block th:replace="~{includes/header.html :: nav}"></th:block>
+
 <div class="wrapper">
-    <header>
-        <div class="top-header">
-            <ul>
-                <li th:if="${#authorization.expression('!hasRole(''ADMIN'') or isAnonymous()')}"><a th:href="@{/member/join}"> 회원가입 </a></li>
-                <li th:if="${#authorization.expression('!hasRole(''ADMIN'') or isAnonymous()')}"><a th:href="@{/member/reservation}"> 바로예매 </a></li>
-                <li th:if="${#authorization.expression('!hasRole(''ADMIN'') or isAnonymous()')}"><a href="">고객센터</a></li>
-                <li th:if="${#authorization.expression('hasRole(''ADMIN'')')}"><a th:href="@{admin/main}">관리자 페이지</a></li>
-                <li><a href="javascript:void(0)"><span class="material-symbols-outlined" data-bs-toggle="modal" data-bs-target="#exampleModal">menu</span></a></li>
-            </ul>
-        </div>
-
-
-        <div class="second-header">
-            <div class="left">
-                <ul class="sns">
-                    <li><a href=""><img src="/image/페이스북.png" alt="페이스북로고">&nbsp;페이스북</a></li>
-                    <li><a href="" style="width: 35px"><img src="/image/유튜브-removebg-preview.png" alt="유튜브로고">&nbsp;유튜브</a></li>
-                    <li><a href=""><img src="/image/인스타그램.png" alt="인스타그램로고">&nbsp;인스타그램</a></li>
-                </ul>
-            </div>
-            <div class="center">
-                <div class="logo">
-                    <a th:href="@{/main}"><img src="/image/logo.jpg" /></a>
-                </div>
-
-            </div>
-            <div class="right">
-                <ul>
-                    <!-- 기본상태 -->
-                    <li sec:authorize="isAuthenticated()"><a th:href="@{/member/userInfo}"><span class="material-symbols-outlined credit_card">credit_card</span></a></li>  <!--멤버쉽-->
-                    <li th:if="${#authorization.expression('!hasRole(''ADMIN'') or isAnonymous()')}"><a href=""><span class="material-symbols-outlined groups">groups</span></a></li>            <!--단체관람/대관문의-->
-                    <li sec:authorize="isAuthenticated()"><a th:href="@{/member/logout}"><span class="material-symbols-outlined logout">logout</span></a></li>            <!--로그아웃-->
-                    <!-- 로그인상태 -->
-                    <li sec:authorize="isAnonymous()"><a th:href="@{/member/login}"><span class="material-symbols-outlined login">login</span></a></li>
-                </ul>
-            </div>
-        </div>
-    </header>
-
-
-    <nav>
-        <ul class="mainmenu">
-            <li><a href="">예매</a>
-                <ul class="submenu">
-                    <li><a href="">예매하기</a></li>
-                    <li><a href="">상영시간표</a></li>
-                    <li><a href="">할인안내</a></li>
-                </ul>
-            </li>
-            <li><a href="">영화</a>
-                <ul class="submenu">
-                    <li><a href="">홈</a></li>
-                    <li><a href="">현재상영작</a></li>
-                    <li><a href="">상영예정작</a></li>
-                    <li><a href="">아르떼</a></li>
-                    <li><a href="">국립극장</a></li>
-                </ul>
-            </li>
-            <li><a href="">영화관</a>
-                <ul class=submenu>
-                    <li><a href="">스페셜관</a></li>
-                    <li><a href="">서울</a></li>
-                    <li><a href="">경상/대구</a></li>
-                    <li><a href="">경기/인천</a></li>
-                    <li><a href="">강원</a></li>
-                </ul>
-            </li>
-            <li><a href="">이벤트</a>
-                <ul class="submenu">
-                    <li><a href="">홈</a></li>
-                    <li><a href="">영화</a></li>
-                    <li><a href="">시사회/무대인사</a></li>
-                    <li><a href="">HOT</a></li>
-                    <li><a href="">제휴할인</a></li>
-                    <li><a href="">우리동네영화관</a></li>
-                </ul>
-            </li>
-            <li><a href="">스토어</a>
-                <ul class="submenu">
-                    <li><a href="">베스트</a></li>
-                    <li><a href="">관람권</a></li>
-                    <li><a href="">스낵음료</a></li>
-                    <li><a href="">포토카드</a></li>
-                </ul>
-            </li>
-
-        </ul>
-    </nav>
 
     <form id="join_form" method="post" action="/member/join">
         <div class="wrap">
@@ -138,14 +63,14 @@
             <div class="pw_wrap">
                 <div class="pw_name">비밀번호</div>
                 <div class="pw_input_box">
-                    <input class="pw_input" name="userPw">
+                    <input type="password" class="pw_input" name="userPw">
                 </div>
                 <span class="final_pw_ck">비밀번호를 입력해주세요.</span>
             </div>
             <div class="pwck_wrap">
                 <div class="pwck_name">비밀번호 확인</div>
                 <div class="pwck_input_box">
-                    <input class="pwck_input">
+                    <input type="password" class="pwck_input">
                 </div>
                 <span class="final_pwck_ck">비밀번호 확인을 입력해주세요.</span>
                 <span class="pwck_input_re_1">비밀번호가 일치합니다.</span>
@@ -198,41 +123,24 @@
             </div>
         </div>
     </form>
-
-    <footer th:fragment="content">
-        <div class="footer">
-            <div class="inner">
-				<span class="footerlogo"> <img
-                        src="/image/logo3.png" alt="">
-				</span>
-                <ul class="footermenu">
-                    <li><a href="#">이용약관</a></li>
-                    <li><a href="#">개인정보처리방침</a></li>
-                    <li><a href="#">이메일무단수집거부</a></li>
-                    <li><a href="#">영상정보처리기기 운영 및 관리방침</a></li>
-                    <li><a href="#">L.POINT회원안내</a></li>
-                    <li><a href="#">배정기준</a></li>
-                    <li><a href="#">채용안내</a></li>
-                    <li><a href="#">광고/임대문의</a></li>
-                    <li><a href="#">기업정보</a></li>
-                    <li><a href="#">사회적책임</a></li>
-                </ul>
-                <div class="address">
-                    <address>서울특별시 송파구 올림픽로 300 롯데월드타워 27층</address>
-                    <span class="bar">고객센터 1544-8855 (유료)</span><br> <span
-                        class="bar">대표이사 4조</span> <span class="bar">사업자등록번호
-						111-11-11111</span> <span class="bar">통신판매업신고번호 제1111호</span> <span
-                        class="bar">개인정보보호책임자 4조</span>
-                </div>
-                <p class="copyright" style="font-size: 12px;">COPYRIGHT LOTTE
-                    CINEMA ALL RIGHT RESERVED.</p>
-            </div>
-        </div>
-    </footer>
 </div>
 
-<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<!-- footer -->
+<th:block th:replace="~{includes/footer.html :: footer}"></th:block>
+
+<!-- 제이쿼리 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js" integrity="sha512-57oZ/vW8ANMjR/KQ6Be9v/+/h6bq9/l3f0Oc7vn6qMqyhvPd1cvKBRWWpzu0QoneImqr2SkmO4MSqU+RpHom3Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<!-- lodash cdn -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js" integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<!-- Swiper -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+<!-- sweetalert -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
+<!-- 우편 검색 -->
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+<script type="text/javascript" src="/js/main.js"></script>
 <script type="text/javascript" src="/js/joincheck.js"></script>
 <script type="text/javascript" src="/js/daumaddr.js"></script>
 

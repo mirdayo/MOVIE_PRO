@@ -21,16 +21,17 @@ h1, h2, h3, h4, h5, h6, address, caption, em, th {
     font-style:normal; font-weight:normal;
 }
 
-/* !!!!메인인가 헤더에 이미지 전체 설정된거 고쳐야함!!!! */
-/* !!!!!폰트 설정!!!!! */
 /* 전체 */
 body{
     width: 100%;
     line-height: 1.1;
     letter-spacing: -0.03em;
+    padding:0px;
 }
 ul{
-    list-style: none;
+    padding :0px;
+    margin:0px;
+    list-style:none;
 }
 li{
     list-style: none;
@@ -51,5 +52,6 @@ label {
     cursor: default;
 }
 *{
-    font-family: 'NanumBarunGothicYetHangul';
+    box-sizing: unset !important;
+    font-family: 'Noto Sans KR', sans-serif;
 }

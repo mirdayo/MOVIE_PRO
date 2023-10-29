@@ -162,7 +162,7 @@ public class MemberController {
         memberService.PostUserDelete(userId);
         //사용자 세션 종료(로그아웃)
         session.invalidate();
-        return "redirect:/main";
+        return "redirect:/index";
     }
 
 

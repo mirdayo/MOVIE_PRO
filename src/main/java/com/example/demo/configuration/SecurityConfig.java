@@ -6,17 +6,13 @@ import com.example.demo.configuration.auth.PrincipalDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
 
 import javax.sql.DataSource;
 
@@ -49,30 +45,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/static/**").permitAll()
                 .antMatchers("/css/**", "/js/**", "/image/**").permitAll()
-                .antMatchers("/**").permitAll()
-//                .antMatchers("/", "/member/**", "/main", "/member/join","/member/login").permitAll()
-//                .antMatchers("/admintest/**","/mainImage/**").permitAll()
-//                .antMatchers("/movielist/**").permitAll()
-//                .antMatchers("/reservation/**").permitAll()
-////                .antMatchers("/admin/**").hasRole("ADMIN")
-//                .antMatchers("/admin/**").permitAll()
-//                .anyRequest().authenticated()
+                .antMatchers("/index", "/member/join","/member/login", "/member/loginrequest", "/member/memberIdChk").permitAll()
+                .antMatchers("/admin/**").hasRole("ADMIN")
+                .anyRequest().authenticated()
                 .and()
 
                 .formLogin()
-//                    .loginPage("/member/login")
+                    .loginPage("/member/login")
 //                    .loginProcessingUrl("/member/login")
                     .successHandler(successHandler)
                     .failureHandler(failureHandler)
                     .usernameParameter("userId")
                     .passwordParameter("userPw")
-                    .defaultSuccessUrl("/main")
+                    .defaultSuccessUrl("/index")
                     .permitAll()
                 .and()
 
                 .logout()
                     .logoutUrl("/member/logout")
-                    .logoutSuccessUrl("/main")
+                    .logoutSuccessUrl("/index")
                     .permitAll();
 
         http.csrf().disable();

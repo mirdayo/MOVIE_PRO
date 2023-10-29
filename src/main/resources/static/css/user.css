@@ -12,13 +12,16 @@
     display: flex;
     justify-content: center;
 }
+.mypage-warp>.mypage>.mypage-menu{
+    margin-bottom: 30px;
+}
 .mypage-warp>.mypage>.mypage-menu::after {
     display: block;
     content: '';
     clear: both;
 }
 .mypage-warp>.mypage>.mypage-menu>li {
-    margin-left: 200px;
+    margin-left: 40px;
     float: left;
     background-color: gray;
 }
@@ -27,7 +30,7 @@
     position: relative;
     padding-top: 80px;
     width: 180px;
-    height: 120px;
+    height: 60px;
     text-align: center;
     cursor: pointer;
 }
@@ -51,7 +54,7 @@
 .mypage-warp>.userChange {
     display: none;
     position: relative;
-    margin: 30px 50px 10px 50px;
+    margin: 50px 50px 100px 50px;
 }
 /* 바로 아래 tip */
 .mypage-warp>.userChange>.tip {
@@ -148,7 +151,7 @@
 /* 회원 탈퇴 */
 .mypage-warp>.userWithdraw {
     display: none;
-    margin: 100px;
+    margin: 50px 50px 100px 50px;
 }
 .mypage-warp>.userWithdraw>#delete_form>.user-delete {
     margin: 0 0 50px;
@@ -238,7 +241,6 @@
 /* 업데이트 버튼 */
 .mypage-warp>.userChange>.update-btn-center {
     text-align: center;
-    margin: ;
 }
 .mypage-warp>.userChange>.update-btn-center>.update-cancle-btn {
     display: inline-block;

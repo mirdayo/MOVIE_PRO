@@ -83,9 +83,6 @@
         /* 최종 유효성 검사 */
         if(idCheck&&idckCheck&&pwCheck&&pwckCheck&&pwckcorCheck&&nameCheck&&phoneCheck&&addressCheck ){
 
-            //$("#join_form").attr("action", "/member/join");
-            //$("#join_form").attr("method", "post");
-            //$("#join_form").submit();
         Swal.fire({
             icon: 'success',
             title: '회원가입에 성공하셨습니다.',
@@ -115,7 +112,6 @@
             url : "/member/memberIdChk",
             data : data,
             success : function(result){
-                 //console.log("성공 여부" + result);
                 if(result != "fail"){
                     $('.id_input_re_1').css("display","inline-block");
                     $('.id_input_re_2').css("display", "none");

@@ -22,7 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @Slf4j
-@RequestMapping(value="/admintest")
+@RequestMapping(value="/admin")
 public class AdminRestController {
 	
 	@Autowired

@@ -37,8 +37,8 @@
 						<div style="margin-left : 30px; margin-top : 16px; text-align:center;">
 							검색 수 <span th:text="${totalMovieCount}"></span> 건
 						</div>
-						<span>
-							<a th:href="@{/admintest/addUpdate}">목록업데이트</a>
+						<span style="margin-left:10px;">
+							<a href="#" id="updateLink" style="display: inline-block; padding: 15px;">목록업데이트</a>
 						</span>
                     </div>
 					<div class="table_wrap">
@@ -127,42 +127,64 @@
                     </div>
                 </footer>
 
-				<script>
-					$(document).ready(function(){
-						var moveForm = $("#moveForm");
+<script>
+	$(document).ready(function(){
+		var moveForm = $("#moveForm");
 
-						$(".move").on("click", function(e){
-							e.preventDefault();
+		$(".move").on("click", function(e){
+			e.preventDefault();
 
-							moveForm.append("<input type='hidden' name='movieId' value='"+ $(this).attr("href")+"'>");
-							moveForm.attr("action", "/main");
-							moveForm.submit();
-						});
+			moveForm.append("<input type='hidden' name='movieId' value='"+ $(this).attr("href")+"'>");
+			moveForm.attr("action", "/main");
+			moveForm.submit();
+		});
 
-						$(".pageInfo_area a").on("click", function(e){
-							e.preventDefault();
+		$(".pageInfo_area a").on("click", function(e){
+			e.preventDefault();
 
-							var pageNum = parseInt($(this).text());
+			var pageNum = parseInt($(this).text());
 
-							if(!isNaN(pageNum)){
-								$("input[name='pageNum']").val(pageNum);
-								$("#moveForm").attr("action", "/admin/movieManage");
-								$("#moveForm").submit();
-							}
-						});
-					});
-				    $(".previous a, .next a").on("click", function(e){
-						e.preventDefault();
+			if(!isNaN(pageNum)){
+				$("input[name='pageNum']").val(pageNum);
+				$("#moveForm").attr("action", "/admin/movieManage");
+				$("#moveForm").submit();
+			}
+		});
+	});
+	$(".previous a, .next a").on("click", function(e){
+		e.preventDefault();
 
-						var pageNum = $(this).attr('href').match(/pageNum=(\d+)/)[1];
+		var pageNum = $(this).attr('href').match(/pageNum=(\d+)/)[1];
 
-						if(pageNum){
-							$("input[name='pageNum']").val(pageNum);
-							$("#moveForm").attr("action", "admin/movieManage");
-							$("#moveForm").submit();
-						}
-					});
-				});
-				</script>
+		if(pageNum){
+			$("input[name='pageNum']").val(pageNum);
+			$("#moveForm").attr("action", "admin/movieManage");
+			$("#moveForm").submit();
+		}
+	});
+});
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+	$(document).ready(function() {
+        $('#updateLink').click(function(e) {
+            e.preventDefault();
+            $.ajax({
+                url: '/admin/addUpdate',
+                type: 'GET',
+                success: function(response) {
+                    // 성공 시 처리 로직
+                    alert("업데이트 성공!");
+                },
+                error: function(error) {
+                    // 에러 시 처리 로직
+                    alert("오류가 발생 했습니다! : ", error);
+                }
+            });
+        });
+    });
+</script>
+
 </body>
 </html>

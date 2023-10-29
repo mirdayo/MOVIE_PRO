@@ -33,37 +33,6 @@ public class MovieController {
     private final PlayMovieService playMovieService;
 
 
-//    @GetMapping("/main")
-//    public String GETMainPage() {
-//
-//        log.info("메인 페이지 진입");
-//
-//        return "main";
-//    }
-
-//    //영화목록
-//    @GetMapping("/movielist")
-//    public String GETMovie(Model model){
-//
-//        List<MovieDTO> movieList = movieService.getList();
-//        model.addAttribute("list", movieList);
-//        return "/movielist";
-//    }
-
-
-
-    //영화목록 페이지 접속(페이징 적용)
-//    @GetMapping("/movielist")
-//    public void GETMovieList(Model model, Criteria criteria, Search search) {
-////        log.info("GETMovieList 진입 ");
-//
-//        model.addAttribute("list", movieService.getListPaging(criteria, search));
-//
-//        int total = movieService.getTotal(search);
-//        PageMakerDTO pageMaker = new PageMakerDTO(criteria, total);
-//        model.addAttribute("pageMaker", pageMaker);
-//    }
-
     //영화검색 + 페이징
     @GetMapping("/movielist")
     public void GETMovieList(Search search, Criteria criteria, Model model){

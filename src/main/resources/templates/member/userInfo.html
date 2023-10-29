@@ -1,130 +1,52 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
-      lang="en">
+      lang="">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-<!--    <link rel="stylesheet" type="text/css" href="/css/default.css"/>-->
+    <title>유저 정보</title>
     <link rel="stylesheet" type="text/css" href="/css/header.css"/>
     <link rel="stylesheet" type="text/css" href="/css/footer.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/default.css"/>
     <link rel="stylesheet" type="text/css" href="/css/user.css"/>
-    <!-- sweetalert -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+
+    <!-- Jquery -->
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
     <!-- google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@350&display=swap" rel="stylesheet">
 
-
     <!-- google icon -->
-    <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <style>
+        .material-symbols-outlined {
+          font-variation-settings:
+          'FILL' 0,
+          'wght' 200,
+          'GRAD' 0,
+          'opsz' 24;
+          color:black;
+        }
+    </style>
+
+    <!-- Swiper cdn -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+
+    <!-- sweetalert -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
 
 </head>
 
 <body>
+
+<!-- header -->
+<th:block th:replace="~{includes/header.html :: header}"></th:block>
+<th:block th:replace="~{includes/header.html :: nav}"></th:block>
+
 <div class="wrapper">
-    <header>
-        <div class="top-header">
-            <ul>
-                <li th:if="${#authorization.expression('!hasRole(''ADMIN'') or isAnonymous()')}"><a
-                        th:href="@{/member/join}"> 회원가입 </a></li>
-                <li th:if="${#authorization.expression('!hasRole(''ADMIN'') or isAnonymous()')}"><a
-                        th:href="@{/member/reservation}"> 바로예매 </a></li>
-                <li th:if="${#authorization.expression('!hasRole(''ADMIN'') or isAnonymous()')}"><a href="">고객센터</a>
-                </li>
-                <li th:if="${#authorization.expression('hasRole(''ADMIN'')')}"><a th:href="@{admin/main}">관리자 페이지</a>
-                </li>
-                <li><a href="javascript:void(0)"><span class="material-symbols-outlined" data-bs-toggle="modal"
-                                                       data-bs-target="#exampleModal">menu</span></a></li>
-            </ul>
-        </div>
 
-
-        <div class="second-header">
-            <div class="left">
-                <ul class="sns">
-                    <li><a href=""><img src="/image/페이스북.png" alt="페이스북로고">&nbsp;페이스북</a></li>
-                    <li><a href="" style="width: 35px"><img src="/image/유튜브-removebg-preview.png" alt="유튜브로고">&nbsp;유튜브</a>
-                    </li>
-                    <li><a href=""><img src="/image/인스타그램.png" alt="인스타그램로고">&nbsp;인스타그램</a></li>
-                </ul>
-            </div>
-            <div class="center">
-                <div class="logo">
-                    <a th:href="@{/main}"><img src="/image/logo.jpg" /></a>
-                </div>
-
-            </div>
-            <div class="right">
-                <ul>
-                    <!-- 로그인상태 -->
-                    <li th:if="${#authorization.expression('!hasRole(''ADMIN'') or isAnonymous()')}"><a
-                            th:href="@{/member/userInfo}"><span class="material-symbols-outlined credit_card">credit_card</span></a>
-                    </li>  <!--멤버쉽-->
-                    <li th:if="${#authorization.expression('!hasRole(''ADMIN'') or isAnonymous()')}"><a href=""><span
-                            class="material-symbols-outlined groups">groups</span></a></li>            <!--단체관람/대관문의-->
-                    <li sec:authorize="isAuthenticated()"><a th:href="@{/member/logout}"><span
-                            class="material-symbols-outlined logout">logout</span></a></li>            <!--로그아웃-->
-                    <!-- 기본상태 -->
-                    <li sec:authorize="isAnonymous()"><a th:href="@{/member/login}"><span
-                            class="material-symbols-outlined login">login</span></a></li>
-                </ul>
-            </div>
-        </div>
-    </header>
-
-
-    <nav>
-        <ul class="mainmenu">
-            <li><a href="">예매</a>
-                <ul class="submenu">
-                    <li><a href="">예매하기</a></li>
-                    <li><a href="">상영시간표</a></li>
-                    <li><a href="">할인안내</a></li>
-                </ul>
-            </li>
-            <li><a href="">영화</a>
-                <ul class="submenu">
-                    <li><a href="">홈</a></li>
-                    <li><a href="">현재상영작</a></li>
-                    <li><a href="">상영예정작</a></li>
-                    <li><a href="">아르떼</a></li>
-                    <li><a href="">국립극장</a></li>
-                </ul>
-            </li>
-            <li><a href="">영화관</a>
-                <ul class=submenu>
-                    <li><a href="">스페셜관</a></li>
-                    <li><a href="">서울</a></li>
-                    <li><a href="">경상/대구</a></li>
-                    <li><a href="">경기/인천</a></li>
-                    <li><a href="">강원</a></li>
-                </ul>
-            </li>
-            <li><a href="">이벤트</a>
-                <ul class="submenu">
-                    <li><a href="">홈</a></li>
-                    <li><a href="">영화</a></li>
-                    <li><a href="">시사회/무대인사</a></li>
-                    <li><a href="">HOT</a></li>
-                    <li><a href="">제휴할인</a></li>
-                    <li><a href="">우리동네영화관</a></li>
-                </ul>
-            </li>
-            <li><a href="">스토어</a>
-                <ul class="submenu">
-                    <li><a href="">베스트</a></li>
-                    <li><a href="">관람권</a></li>
-                    <li><a href="">스낵음료</a></li>
-                    <li><a href="">포토카드</a></li>
-                </ul>
-            </li>
-
-        </ul>
-    </nav>
     <div class="mypage-warp">
         <div class="mypage">
             <ul class="mypage-menu">
@@ -181,11 +103,6 @@
                     <button type="submit" class="phone-save">전송</button>
                 </form>
                 <hr/>
-                <!--            <label for="" id="birth" style="padding-left: 15px;">생년월일</label>-->
-                <!--            <select id="year-select"></select>-->
-                <!--            <select id="month-select"></select>-->
-                <!--            <select id="day-select"></select>-->
-                <!--            <hr/>-->
                 <form id="addr-update-form" method="post">
                     <label for="postcode" id="address" style="padding-left: 45px;">주소</label>
                     <input type="text" class="address_input_1" name="userAddr1" id="postcode" placeholder="우편번호를 입력하세요"
@@ -199,7 +116,7 @@
                     <span class="final_addr_ck">주소를 입력해주세요.</span>
                     <button type="submit" class="addr-save">전송</button>
                 </form>
-                <button class="address_button" onclick="execution_daum_address()"><span>주소 찾기</span></button>
+                <button class="address_button" onclick="execution_daum_address()" style="margin-top:5px;"><span>주소 찾기</span></button>
                 <hr/>
             </div>
             <ul class="non-list" style="color:red;">
@@ -225,10 +142,10 @@
                     <h3 class="sub-underline2">유의사항</h3>
                     <div class="row">
                         <div class="warning">
-                            <p>- 어쩌구 저쩌구</p>
-                            <p>- 어쩌구 저쩌구</p>
-                            <p>- 어쩌구 저쩌구</p>
-                            <p>- 어쩌구 저쩌구</p>
+                            <p>- 탈퇴 즉시 개인정보가 삭제되며, 어떠한 방법으로도 복원할 수 없습니다.</p>
+                            <p>- 아이디를 탈퇴하시면 결제취소가 불가능합니다.</p>
+                            <p>- 현재 진행중인 주문 또느 이용중인 서비스가 있을 경우 탈퇴가 불가합니다.</p>
+                            <p>- 제휴사 탈퇴 시, 제휴사에서 사용하시던 포인트, 쿠폰 등은 복원할 수 없습니다.</p>
                         </div>
                     </div>
                 </div>
@@ -239,25 +156,29 @@
             </form>
         </div>
     </div>
-
-    <th:block th:replace="~{includes/footer.html :: content}"></th:block>
 </div>
 
-    <!-- 자바 스크립트 -->
-    <!-- 제이쿼리 -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <!-- lodash cdn -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"
-            integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ=="
-            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <!-- Swiper -->
-    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
-    <!-- 우편 검색 -->
-    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<!-- footer -->
+<th:block th:replace="~{includes/footer.html :: footer}"></th:block>
 
-    <script type="text/javascript" src="/js/main.js"></script>
-    <script type="text/javascript" src="/js/daumaddr.js"></script>
-    <script type="text/javascript" src="/js/userInfo.js"></script>
+<!-- 자바 스크립트 -->
+<!-- 제이쿼리 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js" integrity="sha512-57oZ/vW8ANMjR/KQ6Be9v/+/h6bq9/l3f0Oc7vn6qMqyhvPd1cvKBRWWpzu0QoneImqr2SkmO4MSqU+RpHom3Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<!-- lodash cdn -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"
+        integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<!-- Swiper -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+<!-- sweetalert -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
+<!-- 우편 검색 -->
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+<script type="text/javascript" src="/js/main.js"></script>
+<script type="text/javascript" src="/js/daumaddr.js"></script>
+<script type="text/javascript" src="/js/userInfo.js"></script>
 
 </body>
 </html>

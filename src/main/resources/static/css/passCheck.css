@@ -7,7 +7,7 @@
 /* 회원 정보 수정 */
 .mypage-warp>.userChange {
     position: relative;
-    margin: 30px 50px 10px 50px;
+    margin: 50px 50px 100px 50px;
 }
 /* 바로 아래 tip */
 .mypage-warp>.userChange>.tip {
@@ -41,7 +41,7 @@
     height: 25px;
     line-height: 25px;
 }
-.mypage-warp>.userChange>.update-btn-center {
+.mypage-warp>.userChange>.pwd-update-btn-center {
     text-align: center;
 }
 .mypage-warp>.userChange>.pwd-update-btn-center>.pwd-update-cancle-btn {

@@ -87,7 +87,7 @@ $(function(){
         changeMonth : true,
         changeYear : true,
         minDate: '-0D', //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
-        maxDate: '2023-10-30' //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후)
+        maxDate: '2023-11-10' //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후)
   });
   $("input[name='publeYear']").datepicker('setDate', 'today'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)
 });
@@ -197,21 +197,24 @@ $.ajax({
         //예약 테이블에서 좌석 조회
         var theaterPlayMovieId = localStorage.getItem('theaterPlayMovieId');
 
-            $.ajax({
-                url: 'reserve/' + theaterPlayMovieId,
-                type: 'GET',
-                success: function(reservedSeats) {
-                    reservedSeats = reservedSeats[0].split(', ');  // 추가된 코드
+        $.ajax({
+            url: '/reserve/' + theaterPlayMovieId,
+            type: 'GET',
+            success: function(reservedSeats) {
+                $('.seat.reserved').removeClass('reserved');  // 모든 좌석의 reserved 클래스 제거
 
-                    reservedSeats.forEach(function(seat) {
-                        console.log(seat);
-                        var seatElement = $('.seat[data-hidden-value="' + seat.trim() + '"]');
-                        seatElement.addClass('reserved');
-                        seatElement.css('pointer-events', 'none'); // 클릭 이벤트 핸들러 제거
-                    });
-                }
-            });
+                reservedSeats = reservedSeats[0].split(', ');
+
+                reservedSeats.forEach(function(seat) {
+                    console.log(seat);
+                    var seatElement = $('.seat[data-hidden-value="' + seat.trim() + '"]');
+                    seatElement.addClass('reserved');
+                    seatElement.css('pointer-events', 'none');
+                });
+            }
+        });
     },
+
     error: function(jqXHR, textStatus, errorThrown) {
         console.log('시트 에러값', textStatus, errorThrown);
     }
